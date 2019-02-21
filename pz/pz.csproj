@@ -218,7 +218,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MemberEventsController.cs" />
     <Compile Include="Controllers\MemberSpotsController.cs" />
-    <Compile Include="Controllers\MoblieController.cs" />
+    <Compile Include="Controllers\MobileController.cs" />
     <Compile Include="Controllers\PointModelsController.cs" />
     <Compile Include="Controllers\ProfilesController.cs" />
     <Compile Include="Controllers\SpotsController.cs" />

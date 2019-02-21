@@ -12,6 +12,7 @@ namespace pz.Models
         public string LastName { get; set; }
         public string Address { get; set; }
         public string Username { get; set; }
+        public Guid Token { get; set; }
 
         public virtual IList<MemberEvent> MemberOfEvents { get; set; }
 
