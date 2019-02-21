@@ -14,7 +14,7 @@ namespace pz.Controllers
     public class EventModelsController : Controller
     {
         private PzContext db = new PzContext();
-
+        private string test = "karol dzban";
 
 
         public ActionResult AddPointToEvent()
