@@ -7,7 +7,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web;
-using System.Web.Http;
 using System.Web.Mvc;
 
 namespace pz.Controllers
@@ -35,7 +34,7 @@ namespace pz.Controllers
             }
         }
 
-        [System.Web.Http.HttpPost]
+        [HttpPost]
         public ActionResult Authenticate(string login, string password)
         {
             var user = UserManager.FindByEmail(login);
@@ -51,6 +50,28 @@ namespace pz.Controllers
             {
                 return Json(new { Response = "success", token = token.ToString() });
 
+            }
+
+            return Json(new { Response = "false" });
+        }
+
+        public ActionResult Check(string data, string token)
+        {
+
+            
+            var profile = db.Profiles.Single(p => p.Token.ToString() == token);
+            var point = db.Points.Single(p => p.QR_code == data);
+
+            if (point != null)
+            {
+                var spots = db.Spots.Where(s => s.Event.Members.Any(mb => mb.ProfileId == profile.ID));
+                foreach (var s in spots)
+                {
+                    db.MemberSpots.Add(new Models.MemberSpots { ProfileId = profile.ID, SpotId = s.ID });
+                }
+                db.SaveChanges();
+
+                return Json(new { Response = "succes" });
             }
 
             return Json(new { Response = "false" });

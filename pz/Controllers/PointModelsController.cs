@@ -38,7 +38,7 @@ namespace pz.Controllers
             using (MemoryStream ms = new MemoryStream())
             {
                 QRCodeGenerator qrGenerator = new QRCodeGenerator();
-                QRCode qrCode = new QRCode(qrGenerator.CreateQrCode(pointModel.ID + "_" + pointModel.Name, QRCodeGenerator.ECCLevel.Q));
+                QRCode qrCode = new QRCode(qrGenerator.CreateQrCode(pointModel.QR_code, QRCodeGenerator.ECCLevel.Q));
                 using (Bitmap bitMap = qrCode.GetGraphic(20))
                 {
                     bitMap.Save(ms, ImageFormat.Png);
@@ -60,11 +60,11 @@ namespace pz.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,Description,X,Y,QR_code")] PointModel pointModel)
+        public ActionResult Create([Bind(Include = "ID,Name,Description,X,Y")] PointModel pointModel)
         {
             if (ModelState.IsValid)
             {
-
+                pointModel.QR_code = pointModel.ID.ToString() + "_" + pointModel.Name;
 
                 db.Points.Add(pointModel);
                 db.SaveChanges();
@@ -96,7 +96,7 @@ namespace pz.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,Description,X,Y,QR_code")] PointModel pointModel)
+        public ActionResult Edit([Bind(Include = "ID,Name,Description,X,Y")] PointModel pointModel)
         {
             if (ModelState.IsValid)
             {
