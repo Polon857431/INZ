@@ -49,11 +49,11 @@ namespace pz.Controllers
             {
                 db.MemberEvents.Add(memberEvent);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details","EventModels", new {id = eid});
             }
 
 
-            ViewBag.ProfileId = new SelectList(db.Profiles, "ID", "FirstName");
+           // ViewBag.ProfileId = new SelectList(db.Profiles, "ID", "FirstName");
             return View();
         }
 

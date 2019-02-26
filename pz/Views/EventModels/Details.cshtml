@@ -1,4 +1,5 @@
-﻿@model pz.Models.EventModel
+﻿@using pz.Models
+@model pz.Models.EventModel
 
 @{
     ViewBag.Title = "Details";
@@ -53,6 +54,7 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Zapisz się", "Create","MemberEvents", new {eid = Model.ID}, null ) |
+    @Html.ActionLink("Edit", "Edit", new {id = Model.ID}) |
     @Html.ActionLink("Back to List", "Index")
 </p>

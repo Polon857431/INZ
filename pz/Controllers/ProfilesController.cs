@@ -124,5 +124,11 @@ namespace pz.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public string GetCurrentProfileId()
+        {
+            var profile = db.Profiles.Single(p => p.Username == User.Identity.Name);
+            return profile.ID.ToString();
+        }
     }
 }
